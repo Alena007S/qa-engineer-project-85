@@ -77,7 +77,7 @@
 
 - summary: |
     Проверка кроссбраузерности
-  status: fail
+  status: pass
 
   - summary: |
     Проверка кнопки "Give up"
