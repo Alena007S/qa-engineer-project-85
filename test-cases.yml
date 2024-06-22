@@ -361,7 +361,7 @@
     Открыта страница логина
   test-data: |
      Тестовые данные
-    Nickname = Alena007S Password = password123 Email = 123@mail.com
+     Nickname = Alena007S Password = password123 Email = 123@mail.com
   steps:
     - Вводим Nicname 
     - Вводим Email
