@@ -5,14 +5,12 @@
     При правильном заполнении полей "Nickname", "Email", "Password", "Password Confirmation" должна произойти регистрации пользователя.
   prerequisites: |
     Открыта страница регистрации https://codebattle.hexlet.io/users/new?locale=en&next=%2F
-    Например: открыта страница логина
   test-data: |
-    Тестовые данные
-    Nickname = Новый никней Password = password123 Email = Новая почта
+    empty
   steps:
-    - Вводим Nicname 
-    - Вводим Email
-    - Вводим Password
+    - Вводим новый Nicname 
+    - Вводим новый Email
+    - Вводим новый Password
     - Повторяем Password
     - Нажимаем кнопку «Submit»
   expected-result: |
@@ -40,6 +38,7 @@
   requirement: |
     Пользователь должен войти в систему с ником от Github
   prerequisites:
+    Выполнен вход на сайте GitHub
     Открыта страница регистрации https://codebattle.hexlet.io/users/new?locale=en&next=%2F
   test-data: |
     GitHub
@@ -63,7 +62,7 @@
     - Выбираем "Game type" with a bot
     - Выбираем "Level" параметр по умолчанию
     - Выбираем "Time control"  параметр по умолчанию
-    - Выбираем "Choose task by name or tags" параметр по умолчанию
+    - Выбираем "Choose task by name or tags" выбираем любой параметр
     - Нажимаем кнопку «Create battle»
   expected-result: |
     Пользователь должен попасть на страницу c игрой
@@ -102,7 +101,6 @@
   requirement: |
     Находясь в игре пользователь может выбрать любой язык программирования для написания задачи
   prerequisites:
-    Пользователь авторизован
     Открыта страница с игрой
   test-data: |
     empty
@@ -162,7 +160,7 @@
     - Нажимаем кнопку «Create battle»
   expected-result: |
     На главной странице должна появился запить об созданной игре, при нажатии на кнопку "Continue" пользователь должен увидеть сообщение "Waiting for an opponent
-    Please wait for someone to join or send an invite using the link below"
+    Please wait for someone to join or send an invite using the link below", после присоединения второго игрока, для игррока создавшего игру автоматически запускается игр
 
 - summary: |
     Проверка возможности присоединился к созданной игре из списка в лобби
@@ -190,7 +188,7 @@
   steps:
     - Нажимаем кнопку "Create a game"
     - Выбираем "Level" оставляем по умолчанию
-    - Выбираем "Game type" with other user
+    - Выбираем "Game type" with bot
     - Выбираем "Time control"  оставляем по умолчанию
     - Выбираем "Choose task by name or tags"  "rest_area"
     - Нажимаем кнопку «Create battle»
@@ -270,7 +268,7 @@
     empty
   steps:
     - Заходим на сайт
-    - Нажимаем кнопку «Continue»
+    - Нажимаем кнопку «Continue» рядом с ранее созданной игрой в списке лобби 
   expected-result: |
     На открывшейся странице с игрой пользователь продолжает решать задачу
 
@@ -285,18 +283,32 @@
   steps:
     - Ожидаем 3 минут, не вводя правильного решения
   expected-result: |
-    После истечения 15 минут игра завершается, появляется уведомление "Time is up. There are no winners in the game."
+    После истечения 3 минут игра завершается, появляется уведомление "Time is up. There are no winners in the game."
 
 - summary: |
     Проверка удаления завершенной игры из памяти 
   requirement: |
     Когда оба игрока вышли, игра считается полностью законченной и удаляется из памяти
   prerequisites:
-    Создана игра
+    Открыта главная страница сайта
+    Пользователь авторизован
   test-data: |
     empty
   steps:
-    - Вводим правильное решение 
+    - Нажимаем кнопку "Create a game"
+    - Выбираем "Level" оставляем по умолчанию
+    - Выбираем "Game type" with bot
+    - Выбираем "Time control"  оставляем по умолчанию
+    - Выбираем "Choose task by name or tags"  "rest_area"
+    - Нажимаем кнопку «Create battle»
+    - Выбираем язык програмирования "NodeJS"
+    - Вводим правильное решение задачи
+      "const _ = require("lodash");
+      const R = require("rambda");
+      const solution = (width, length) => {
+      return width * length;
+      };
+      module.exports = solution;"
     - Нажимаем кнопку «Run»
     - Закрываем вкладку с игрой
     - Открываем главную страницу сайта
@@ -308,7 +320,7 @@
   requirement: |
     При нажатии кнопки "Гайд", запускается инструкция из восьми шагов
   prerequisites: |
-    Отркты страница игры
+    Отркта страница игры
   test-data: |
     empty
   steps:
@@ -359,10 +371,10 @@
   prerequisites:
     Открыта страница логина
   test-data: |
-    Email = 123@mail.ru = hexlet Пароль = 12345
+    Email = 123@mail.com Пароль = 12345
   steps:
     - Вводим Email
-    - Вводим неправильный пароль
+    - Вводим пароль
     - Нажимаем кнопку «Submit»
   expected-result: |
     Пользователь должен получить сообщение об ошибке
@@ -374,7 +386,7 @@
   prerequisites:
     Открыта страница логина
   test-data: |
-    Email = @ = hexlet Пароль = 12345
+    Email = @  Пароль = 12345
   steps:
     - Вводим Email
     - Вводим пароль
@@ -423,9 +435,10 @@
   requirement: |
     Незарегистрированный пользователь может создать пробную игру
   prerequisites: |
-    Открыта главная страница сайта https://codebattle.hexlet.io/ Вход в систему не выполнен.
+    Открыта главная страница сайта https://codebattle.hexlet.io/ 
+    Вход в систему не выполнен.
   test-data: |
-    Сайт Codebattle
+    empty
   steps:
     - Нажимаем кнопку «Try simple battle»
   expected-result: |
@@ -489,7 +502,7 @@
   steps:
     - Нажимаем кнопку «На главную»
   expected-result: |
-    Пользователь попадает "На главную" в режиме игры, игрок возвращается на главную страницу сайта, игра при этом продолжается. При нажатии кнопки "Continue" можно вернутся в игру
+    Bгрок возвращается на главную страницу сайта, игра при этом продолжается. При нажатии кнопки "Continue" можно вернутся в игру
 
 - summary: |
     Проверка возможности просматривать рейтинг игроков
